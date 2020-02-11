@@ -8,8 +8,6 @@ public interface OrderService {
 	public String getOrderStringCode(int id);
 	public Order getOrder(int id);
 	public Order createOrder(Order order);
-	public boolean clearOrders();
-	public boolean removeOrder(int id);
 	
 	
 }

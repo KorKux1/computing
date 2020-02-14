@@ -6,9 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import co.edu.icesi.ci.injectionexample1.repositories.CourseRepository;
 import co.edu.icesi.ci.injectionexample1.repositories.CourseRepositoryImp;
-import co.edu.icesi.ci.injectionexample1.repositories.RegistrationRepository;
 import co.edu.icesi.ci.injectionexample1.repositories.RegistrationRepositoryImp;
 import co.edu.icesi.ci.injectionexample1.repositories.StudentRepositoryImp;
 import co.edu.icesi.ci.injectionexample1.service.RegistrationService;

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ import co.edu.icesi.fi.ci.junit5exercise.service.OrderService;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = Junit5AdvancedApplication.class)
 @SpringBootTest
-public class JUnitSpringTests {
+public class StressTests {
 
 	@Autowired
 	private OrderService orderService;
 
-	public JUnitSpringTests(OrderService orderService) {
+	public StressTests(OrderService orderService) {
 		this.orderService = orderService;
 	}
 
@@ -57,9 +58,10 @@ public class JUnitSpringTests {
 
 	@Nested
 	@DisplayName("Query Tests")
-	class QueryTests{
+	class QueryTests{ 
 		
 		@Test
+		@RepeatedTest(100)
 		@DisplayName("check if the return description has a Description")
 		public void testSampleServiceGetAccountDescription() {
 			// Check if the return description has a 'Description:' string.
@@ -67,6 +69,7 @@ public class JUnitSpringTests {
 		}
 		
 		@Test
+		@RepeatedTest(100)
 		@DisplayName("check if the return description has a Code")
 		public void testSampleServiceGetAccountCode() {
 			// Check if the return description has a 'Code:' string.

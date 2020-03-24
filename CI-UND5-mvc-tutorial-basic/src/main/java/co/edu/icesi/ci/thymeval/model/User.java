@@ -21,28 +21,32 @@ import lombok.Data;
 @Entity
 @Data
 public class User {
-
+	
+	public interface firstValidator {};
+	
+	public interface secondValidator {};
+	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
-	@NotBlank
-	@Size(min=2)
+	@NotBlank(groups=firstValidator.class)
+	@Size(min=2, groups=firstValidator.class)
 	private String name;
 	
-	@Email
-	@NotBlank
+	@Email(groups=firstValidator.class)
+	@NotBlank(groups=firstValidator.class)
 	private String email;
 	
-	@NotNull
+	@NotNull(groups=secondValidator.class)
 	private UserType type;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull
-	@Past
+	@NotNull(groups=secondValidator.class)
+	@Past(groups=secondValidator.class)
 	private LocalDate birthDate;
 	
-	@NotNull
+	@NotNull(groups=secondValidator.class)
 	private UserGender gender;
 	
 //	@OneToMany

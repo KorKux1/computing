@@ -23,10 +23,6 @@ import lombok.Data;
 @Data
 public class Appointment {
 	
-	public interface firstValidator {};
-	
-	public interface secondValidator {};
-	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;

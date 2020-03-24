@@ -26,7 +26,7 @@ public class PersonServiceImp  implements PersonService{
 
 	@Override
 	public void addPerson(String name, String lastName) {
-		personRepository.savePerson(new Person(name, lastName));;
+		personRepository.savePerson(new Person(name, lastName));
 	}
 	
 	

@@ -2,8 +2,9 @@ package com.icesi.computacion.semana4.repository;
 
 import java.util.HashMap;
 
-import com.icesi.computacion.semana4.model.Person;
+import org.springframework.stereotype.Repository;
 
+import com.icesi.computacion.semana4.model.Person;
 
 public class PersonRepositoryImp implements PersonRepository{
 

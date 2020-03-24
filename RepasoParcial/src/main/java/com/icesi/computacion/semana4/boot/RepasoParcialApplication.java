@@ -26,7 +26,7 @@ public class RepasoParcialApplication {
 		return (args) -> {
 			personServiceImp.addPerson("Juan", "Martinez");
 			personServiceImp.addPerson("Jorge", "Castro");
-			personServiceImp.removePerson("Castro");
+ 			personServiceImp.removePerson("Castro");
 			personServiceImp.removePerson("Martinez");
 		};
 	} 

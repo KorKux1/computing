@@ -37,8 +37,6 @@ public class UserController {
 	@GetMapping("/users/add")
 	public String addUser2(Model model) {
 		model.addAttribute("user", new User());
-		/*model.addAttribute("genders", userService.getGenders());
-		model.addAttribute("types", userService.getTypes());*/
 		return "users/add-user1";
 	}
 	
@@ -72,30 +70,6 @@ public class UserController {
 			userService.save(user);
 		return "redirect:/users/";
 	}
-
-	/*@PostMapping("/users/add")
-	public String saveUser(@Validated User user, BindingResult bindingResult, @RequestParam(value = "action", required = true) String action) {
-		
-		if(bindingResult.hasErrors()) {
-			return "users/add-user";
-		}
-		
-		if (!action.equals("Cancel"))
-			userService.save(user);
-			return "redirect:/users/";
-	}*/
-		
-	/*@PostMapping("/users/add2")
-	public String saveUser2(@Validated({secondValidator.class}) User user, BindingResult bindingResult, @RequestParam(value = "action", required = true) String action) {
-		
-		if(bindingResult.hasErrors()) {
-			return "users/add-user2";
-		}
-		
-		if (!action.equals("Cancel"))
-			userService.save(user);
-			return "redirect:/users/";
-	}*/
 
 	@GetMapping("/users/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {

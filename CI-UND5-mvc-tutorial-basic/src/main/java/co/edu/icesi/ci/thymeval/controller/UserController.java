@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.ci.thymeval.model.User;
+import co.edu.icesi.ci.thymeval.model.User.firstValidator;
+import co.edu.icesi.ci.thymeval.model.User.secondValidator;
 import co.edu.icesi.ci.thymeval.service.UserService;
 
 @Controller
@@ -24,7 +26,6 @@ public class UserController {
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
-		;
 	}
 
 	@GetMapping("/users/")
@@ -32,16 +33,47 @@ public class UserController {
 		model.addAttribute("users", userService.findAll());
 		return "users/index";
 	}
-
+	
 	@GetMapping("/users/add")
-	public String addUser(Model model) {
+	public String addUser2(Model model) {
 		model.addAttribute("user", new User());
+		/*model.addAttribute("genders", userService.getGenders());
+		model.addAttribute("types", userService.getTypes());*/
+		return "users/add-user1";
+	}
+	
+	@PostMapping("/users/add")
+	public String saveUser(@Validated({firstValidator.class}) User user, BindingResult bindingResult, @RequestParam(value = "action", required = true) String action, Model model) {	
 		model.addAttribute("genders", userService.getGenders());
 		model.addAttribute("types", userService.getTypes());
-		return "users/add-user";
+		
+		if(bindingResult.hasErrors()) {
+			return "users/add-user1";
+		}
+		
+		if (!action.equals("Cancel"))
+			userService.save(user);
+			return "users/add-user2";
+	}
+	
+	@PostMapping("/users/add1")
+	public String saveUser1(@Validated({secondValidator.class}) User user, BindingResult bindingResult, @RequestParam(value = "action", required = true) String action, Model model) {
+		Optional<User> uOptional = userService.findById(user.getId());
+		User user2 = uOptional.get();
+		user.setEmail(user2.getEmail());
+		user.setName(user2.getName());
+		user.setBirthDate(user2.getBirthDate());
+		
+		if(bindingResult.hasErrors()) {
+			return "users/add-user1";
+		}
+		
+		if (!action.equals("Cancel"))
+			userService.save(user);
+		return "redirect:/users/";
 	}
 
-	@PostMapping("/users/add")
+	/*@PostMapping("/users/add")
 	public String saveUser(@Validated User user, BindingResult bindingResult, @RequestParam(value = "action", required = true) String action) {
 		
 		if(bindingResult.hasErrors()) {
@@ -51,7 +83,19 @@ public class UserController {
 		if (!action.equals("Cancel"))
 			userService.save(user);
 			return "redirect:/users/";
-	}
+	}*/
+		
+	/*@PostMapping("/users/add2")
+	public String saveUser2(@Validated({secondValidator.class}) User user, BindingResult bindingResult, @RequestParam(value = "action", required = true) String action) {
+		
+		if(bindingResult.hasErrors()) {
+			return "users/add-user2";
+		}
+		
+		if (!action.equals("Cancel"))
+			userService.save(user);
+			return "redirect:/users/";
+	}*/
 
 	@GetMapping("/users/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {

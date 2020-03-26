@@ -38,13 +38,13 @@ public class User {
 	@NotBlank(groups=firstValidator.class)
 	private String email;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(groups=firstValidator.class)
+	@Past(groups=firstValidator.class)
+	private LocalDate birthDate;
+	
 	@NotNull(groups=secondValidator.class)
 	private UserType type;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(groups=secondValidator.class)
-	@Past(groups=secondValidator.class)
-	private LocalDate birthDate;
 	
 	@NotNull(groups=secondValidator.class)
 	private UserGender gender;
